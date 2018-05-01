@@ -1,3 +1,5 @@
+import sun.misc.Queue;
+
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -71,6 +73,25 @@ public class Maze {
         }
     }
 
+    private void widthSearch() throws InterruptedException {//просто обход в ширину(для сравнения с моим алгоритмом)
+        Queue queue = new Queue();
+        //Point[][] prev = new Point[this.prev[0].length][this.prev.length];
+        ArrayList<Point> visited = new ArrayList<>();
+        queue.enqueue(startCell);
+        while (!queue.isEmpty()){
+            Point current = (Point) queue.dequeue();
+            visited.add(current);
+            if (current.equals(finishCell))break;
+            for (Point step:direction){
+                Point next = pointSum(current,step);
+                if(maze[next.x][next.y]==0&&!visited.contains(next)){
+                    queue.enqueue(next);
+                    prev[next.x][next.y]=current;
+                }
+            }
+        }
+    }
+
     private int step(Point previous, Point current, Point direction){
         if (pointSum(previous,direction).equals(current))//если направление изменилось, то из предыдущей в настоящую не попасть
             return 0;                                    //а если не менялось, то все совпадет и прибавлять изгиб не надо
@@ -81,7 +102,7 @@ public class Maze {
         return new Point(current.x+step.x, current.y+step.y);
     }
 
-    public void out(){
+    public void out(){//вывод для моего алгоритма
         Stack<Point> stack = new Stack<>();
         StringBuilder str = new StringBuilder();
         Point t = finishCell;
@@ -126,7 +147,8 @@ public class Maze {
     public static void main(String[] args) throws InterruptedException {
         Maze maze = new Maze();
         maze.readFromFile();
-        maze.marking();
+        maze.marking();//мой алгоритм
+        //maze.widthSearch();//алгоритм с которым сравнить (если вместе запустить выдаст ошибку, т.к. файлы перезапишутся
         maze.table();
         maze.out();
         //сравнить с обычным поиском в ширину!!!!
