@@ -42,25 +42,6 @@ public class Maze {
         }
     }
 
-    private void widthSearch() throws InterruptedException {//просто обход в ширину(чекай)
-         Queue queue = new Queue();
-         //Point[][] prev = new Point[this.prev[0].length][this.prev.length];
-         ArrayList<Point> visited = new ArrayList<>();
-         queue.enqueue(startCell);
-         while (!queue.isEmpty()){
-             Point current = (Point) queue.dequeue();
-             visited.add(current);
-             if (current.equals(finishCell))break;
-             for (Point step:direction){
-                 Point next = pointSum(current,step);
-                 if(maze[next.x][next.y]==0&&!visited.contains(next)){
-                     queue.enqueue(next);
-                     prev[next.x][next.y]=current;
-                 }
-             }
-         }
-     }
-
     private void marking() throws InterruptedException {
         sun.misc.Queue queue = new sun.misc.Queue<>();
         Point previous;
@@ -122,19 +103,19 @@ public class Maze {
     }
 
     public void out(){//вывод для моего алгоритма
-        Stack<Point> stack = new Stack<>();
+        ArrayList<Point> list = new ArrayList<>();
         StringBuilder str = new StringBuilder();
         Point t = finishCell;
         if (!prev[t.x][t.y].equals(new Point(Integer.MAX_VALUE,Integer.MAX_VALUE))){//проверка на то что мы дошли до финиша
             str.append(startCell.x+1).append(",").append(startCell.y+1).append("\r\n");
-            stack.push(t);//кладу в стэк путь до начала от конца
+            list.add(t);//кладу в стэк путь до начала от конца
             while(!prev[t.x][t.y].equals(startCell)){
                 t = prev[t.x][t.y];
-                stack.push(t);
+                list.add(t);
             }
-            while (!stack.empty()){
-                Point point = stack.pop();
-                str.append(point.x+1).append(",").append(point.y+1).append("\r\n");//достаю путь из стэка
+            Collections.reverse(list);
+            for (Point p:list){
+                str.append(p.x+1).append(",").append(p.y+1).append("\r\n");//достаю путь из стэка
             }
         }
         else str.append("No way");
