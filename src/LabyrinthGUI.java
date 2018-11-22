@@ -24,7 +24,7 @@ public class LabyrinthGUI {
         Border border = BorderFactory.createEtchedBorder(EtchedBorder.RAISED, Color.black, Color.darkGray);//рамка
         this.panelLeft = new JPanel();
         this.panelLeft.setBorder(BorderFactory.createTitledBorder(border, "Поиск с минимальным числом изгибов", TitledBorder.CENTER, TitledBorder.TOP,
-                new Font("arial",Font.PLAIN,20), Color.black));//опять рамка
+                new Font("arial",Font.PLAIN,20), Color.black));//опять
         this.panelRight = new JPanel();
         this.panelRight.setBorder(BorderFactory.createTitledBorder(border, "Поиск в ширину", TitledBorder.CENTER, TitledBorder.TOP,
                 new Font("arial",Font.PLAIN,20), Color.black));
