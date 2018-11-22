@@ -32,7 +32,7 @@ public class LabyrinthGUI {
 
         JButton b1 = new JButton();//элемент лабиринта - неактивная кнопка
         b1.setEnabled(false);
-        b1.setBackground(new Color(153,105,96));
+        b1.setBackground(new Color(155,105,96));
 
 
         JButton b2 = new JButton();
