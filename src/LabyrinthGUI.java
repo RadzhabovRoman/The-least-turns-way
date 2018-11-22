@@ -19,7 +19,7 @@ public class LabyrinthGUI {
         //ГЛАВНОЕ ОКНО
         this.frame = new JFrame("Поиск пути в лабиринте");
         this.frame.setSize(1200,800);
-        this.frame.setLayout(new GridLayout(1,2, 15,30));//число строк, столбцов, расстояния между ними
+        this.frame.setLayout(new GridLayout(1,2, 15,30));//число стак, столбцов, расстояния между ними
 
         Border border = BorderFactory.createEtchedBorder(EtchedBorder.RAISED, Color.black, Color.darkGray);//рамка
         this.panelLeft = new JPanel();
